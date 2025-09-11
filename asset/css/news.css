@@ -1,0 +1,115 @@
+section {
+  padding: 120px 0 0 0;
+}
+.ttl-wrapper {
+  width: 100%;
+  margin: 0 0 60px 0;
+  border-bottom: 1px solid var(--gray);
+  padding-bottom: 40px;
+}
+.news-wrapper {
+  width: 100%;
+  display: flex;
+}
+.news-left {
+  width: 15%;
+  padding: 0 20px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.category-name {
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+  padding-left: 20px;
+  color: var(--black);
+  font-weight: bold;
+  position: relative;
+}
+.category-name::before {
+  content: "";
+  width: 4px;
+  height: 100%;
+  border-radius: 99px;
+  background-color: var(--blue);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.category-item {
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--gray);
+  position: relative;
+}
+.category-item.active {
+  color: var(--blue);
+}
+.category-item.active::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: url("../img/ballbule.svg") no-repeat center/contain;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  left: -30px;
+}
+.news-right {
+  width: 85%;
+  padding: 40px;
+  background-color: var(--white);
+  border-top-left-radius: 50px;
+}
+.category {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 28px;
+  color: var(--black);
+  padding-left: 20px;
+  position: relative;
+}
+.category::before {
+  content: "";
+  width: 4px;
+  height: 100%;
+  border-radius: 99px;
+  background-color: var(--blue);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.selector {
+  display: none;
+}
+.news-container {
+  width: 100%;
+  margin: 40px 0 0 0;
+  padding-bottom: 0;
+  height: 50vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.news-container::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 1067px) {
+  .news-left {
+    display: none;
+  }
+  .news-right {
+    width: 100%;
+    border-top-right-radius: 50px;
+  }
+  .selector {
+    display: block;
+  }
+}

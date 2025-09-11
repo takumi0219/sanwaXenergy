@@ -1,0 +1,162 @@
+@charset "UTF-8";
+/* リセットCSS =============================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  background-color: #f1eeff;
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+ul,
+ol {
+  list-style: none;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ルール =============================================== */
+:root {
+  --blue: #2a8dfe;
+  --black: #131314;
+  --white: #ffffff;
+  --gray: #737373;
+  --purple: #685bc7;
+  --accent: #ffaf54;
+}
+h1 {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 4rem;
+  color: var(--blue);
+  mix-blend-mode: difference;
+}
+h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 64px;
+  color: var(--black);
+}
+h3 {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 32px;
+  color: var(--blue);
+}
+p {
+  color: var(--black);
+  font-family: "Source Sans 3", sans-serif;
+}
+
+/* 共通 */
+section {
+  padding: 60px 0;
+}
+.ttl-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#trial .ttl-wrapper{
+  margin: 0;
+}
+.select {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#content-select-access,
+#content-select-members {
+  border: none;
+  border-bottom: 1px solid var(--gray);
+  padding-bottom: 4px;
+  font-weight: bold;
+  background: none;
+}
+.ttl {
+  text-transform: uppercase;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  font-size: 64px;
+  color: #131313;
+  width: fit-content;
+}
+.ttl-sub {
+  font-size: 32px;
+  color: var(--blue);
+  margin-left: 40px;
+  font-weight: bold;
+  position: relative;
+  width: fit-content;
+}
+.ttl-sub::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: url(../img/ballbule.svg) no-repeat center/contain;
+}
+.btn-container {
+  text-align: center;
+  cursor: pointer;
+}
+.more-btn {
+  display: inline-block;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 20px 80px 20px 60px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+.more-btn:hover {
+  background-color: var(--blue);
+}
+.more-btn::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: inline-block;
+  color: var(--black);
+  background: var(--white);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

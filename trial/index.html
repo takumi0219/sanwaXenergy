@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="サンワXエナジークラブの最新ニュース・大会結果・お知らせ・セール情報を掲載しています。ソフトテニス活動の最新情報をご覧ください。"
+    />
+    <link
+      rel="shortcut icon"
+      href="../asset/img/logo1.svg"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../asset/css/bace.css" />
+    <link rel="stylesheet" href="../asset/css/style.css" />
+    <link rel="stylesheet" href="../asset/css/trial.css" />
+   <!-- <script src="../asset/js/script.js" defer></script> -->
+    <script src="../asset/js/trial.js" defer></script>
+    <title>サンワXエナジークラブ - 体験申し込み</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../asset/img/logo1.svg" alt="サンワXエナジークラブロゴ" />
+                    </a>
+                </div>
+                <div class="nav">
+                    <nav aria-label="グローバルナビゲーション">
+                        <ul class="nav-list">
+                            <li><a class="nav-list-item" href="../index.html#about">about</a></a></li>
+                            <li><a class="nav-list-item" href="../index.html#members">members</a></li>
+                            <li><a class="nav-list-item" href="../index.html#schedule">schedule</a></li>
+                            <li><a class="nav-list-item" href="../index.html#news">news</a></li>
+                            <li><a class="nav-list-item" href="../index.html#access">access</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="hamburger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="trial">
+                <div class="trial-wrapper">
+                    <aside class="trial-left">
+                        <nav>
+                            <ul class="trial-list">
+                                <li class="trial-item active" id="step-input">入力</li>
+                                <li class="trial-item" id="step-confirm">確認</li>
+                                <li class="trial-item" id="step-complete">完了</li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <div class="trial-right">
+                        <div class="ttl-wrapper">
+                            <h2 class="ttl">trial</h2>
+                            <p class="ttl-sub">体験案内</p>
+                        </div>
+
+                        <div id="form-input">
+                            <form id="contact-form" action="" method="post">
+                                <fieldset>
+                                    <legend>個人情報</legend>
+                                    <div class="form-row">
+                                        <label for="name">お名前</label>
+                                        <div class="input-container">
+                                            <input type="text" id="name" name="name" placeholder="例） 山田 太郎" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-row radio-group">
+                                        <label class="radio-label">性別</label>
+                                        <div class="input-container">
+                                            <label><input type="radio" name="gender" value="男性" required /> 男性</label>
+                                            <label><input type="radio" name="gender" value="女性" /> 女性</label>
+                                            <label><input type="radio" name="gender" value="その他" /> その他</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="email">メールアドレス</label>
+                                        <div class="input-container">
+                                            <input type="email" id="email" name="email" placeholder="例） your.email@example.com" required />
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>学校情報</legend>
+                                    <div class="form-row">
+                                        <label for="school-name">学校名</label>
+                                        <div class="input-container">
+                                            <input type="text" id="school-name" name="school-name" placeholder="例） 〇〇市立△△小学校" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="grade">学年</label>
+                                        <div class="input-container">
+                                            <select id="grade" name="grade" required>
+                                                <option value="" disabled selected>選択してください</option>
+                                                <optgroup label="小学校">
+                                                    <option value="小学校4年生">4年生</option>
+                                                    <option value="小学校5年生">5年生</option>
+                                                    <option value="小学校6年生">6年生</option>
+                                                </optgroup>
+                                                <optgroup label="中学校">
+                                                    <option value="中学校1年生">1年生</option>
+                                                    <option value="中学校2年生">2年生</option>
+                                                    <option value="中学校3年生">3年生</option>
+                                                </optgroup>
+                                                <optgroup label="高校">
+                                                    <option value="高校1年生">1年生</option>
+                                                    <option value="高校2年生">2年生</option>
+                                                    <option value="高校3年生">3年生</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>体験希望</legend>
+                                    <div class="form-row">
+                                        <label for="location">希望場所</label>
+                                        <div class="input-container">
+                                            <select id="location" name="location" required>
+                                                <option value="" disabled selected>選択してください</option>
+                                                <option value="東松山">東松山</option>
+                                                <option value="上尾">上尾</option>
+                                                <option value="久喜">久喜</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row datetime-group">
+                                        <div class="input-container">
+                                            <label for="date">希望日時</label>
+                                            <div class="input-flex">
+                                                <input type="date" id="date" name="date" required />
+                                                <input type="time" id="time" name="time" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="btn-container">
+                                    <a href="#" id="confirm-btn" class="more-btn">入力内容を確認する</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="form-confirm" style="display: none;">
+                            <div class="form-row">
+                                <label>お名前</label>
+                                <p id="confirm-name"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>性別</label>
+                                <p id="confirm-gender"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>メールアドレス</label>
+                                <p id="confirm-email"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>学校名</label>
+                                <p id="confirm-school-name"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>学年</label>
+                                <p id="confirm-grade"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>希望場所</label>
+                                <p id="confirm-location"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>希望日時</label>
+                                <p id="confirm-datetime"></p>
+                            </div>
+                            <div class="btn-container">
+                                <a href="#" id="submit-btn" class="more-btn">申し込む</a>
+                                <a href="#" id="back-btn" class="more-btn">修正する</a>
+                            </div>
+                        </div>
+
+                        <div id="form-complete" style="display: none;">
+                            <p class="complete-message">お申し込みありがとうございます。ご案内は後日メールでお届けします！</p>
+                            <div class="form-row">
+                                <label>お名前</label>
+                                <p id="complete-name"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>性別</label>
+                                <p id="complete-gender"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>メールアドレス</label>
+                                <p id="complete-email"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>学校名</label>
+                                <p id="complete-school-name"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>学年</label>
+                                <p id="complete-grade"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>希望場所</label>
+                                <p id="complete-location"></p>
+                            </div>
+                            <div class="form-row">
+                                <label>希望日時</label>
+                                <p id="complete-datetime"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer-wrapper">
+            <div class="top-btn">
+                <button class="btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">top</button>
+            </div>
+            <div class="footer">
+                <div class="footer-left">
+                    <img class="footer-logo" src="../asset/img/logo1.svg" alt="サンワXエナジークラブロゴ" />
+                    <div class="btn-container">
+                        <a class="more-btn" href="#trial">体験申し込みへ</a>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <p class="footer-right-name">サンワXエナジークラブ</p>
+                    <div class="footer-right-nav">
+                        <ul class="footer-right-nav-list">
+                            <li><a class="footer-right-nav-list-item" href="../index.html#about">about</a></li>
+                            <li><a class="footer-right-nav-list-item" href="../index.html#members">members</a></li>
+                            <li><a class="footer-right-nav-list-item" href="../index.html#schedule">schedule</a></li>
+                            <li><a class="footer-right-nav-list-item" href="../index.html#news">news</a></li>
+                            <li><a class="footer-right-nav-list-item" href="../index.html#trial">trial</a></li>
+                            <li><a class="footer-right-nav-list-item" href="../index.html#access">access</a></li>
+                        </ul>
+                        <div class="sns">
+                            <a href="https://x.com/sanwa_x_energy">
+                                <img src="../asset/img/snsx.svg" alt="x" />サンワXエナジークラブ
+                            </a>
+                            <a href="https://x.com/sanwa_sp?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                                <img src="../asset/img/snsx.svg" alt="x" />サンワスポーツ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 サンワXエナジークラブ All Rights Reserved.</p>
+            </div>
+        </div>
+        </footer>
+    </div>
+</body>
+</html>
