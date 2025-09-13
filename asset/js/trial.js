@@ -10,11 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const stepConfirm = document.getElementById("step-confirm");
   const stepComplete = document.getElementById("step-complete");
 
-  // 新しく追加
   const locationSelect = document.getElementById("location");
   const timeInput = document.getElementById("time");
 
-  // 希望場所に応じて時間を自動入力する関数
+  // 希望場所に応じて時間を自動入力
   function setTimeByLocation() {
     const selectedLocation = locationSelect.value;
     if (selectedLocation === "東松山" || selectedLocation === "久喜") {
@@ -22,11 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (selectedLocation === "上尾") {
       timeInput.value = "17:00";
     } else {
-      timeInput.value = ""; // 選択肢がない場合は時間をクリア
+      timeInput.value = "";
     }
   }
 
-  // 関数: 入力内容を取得し、確認画面と完了画面に設定する
+  // 入力内容を確認画面・完了画面に反映
   function setFormDataToConfirmAndComplete() {
     const name = document.getElementById("name").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const confirmDatetime = `${formattedDate} ${formattedTime}`;
 
-    // 確認画面に内容をセット
+    // 確認画面
     document.getElementById("confirm-name").textContent = name;
     document.getElementById("confirm-gender").textContent = gender;
     document.getElementById("confirm-email").textContent = email;
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("confirm-location").textContent = location;
     document.getElementById("confirm-datetime").textContent = confirmDatetime;
 
-    // 完了画面に内容をセット
+    // 完了画面
     document.getElementById("complete-name").textContent = name;
     document.getElementById("complete-gender").textContent = gender;
     document.getElementById("complete-email").textContent = email;
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("complete-datetime").textContent = confirmDatetime;
   }
 
-  // イベントリスナーの追加
+  // --- イベントリスナー ---
   locationSelect.addEventListener("change", setTimeByLocation);
 
   confirmBtn.addEventListener("click", (e) => {
@@ -101,20 +100,35 @@ document.addEventListener("DOMContentLoaded", () => {
     stepInput.classList.add("active");
   });
 
-  submitBtn.addEventListener("click", (e) => {
+  submitBtn.addEventListener("click", async (e) => {
     e.preventDefault();
-    // サーバーサイドへの送信処理（ここでは省略）
-    // fetch('your-server-endpoint', {
-    //     method: 'POST',
-    //     body: new FormData(document.getElementById('contact-form'))
-    // });
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbwYPU05V2A-D4gqLn9k7b8DXzFsg2p7e5Py2He3-aB2CTSVfof01tqZuhSVGojvXSzyzg/exec";
 
-    // 完了画面へ切り替え
-    formConfirm.style.display = "none";
-    formComplete.style.display = "block";
+    const form = document.getElementById("contact-form");
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
-    // ステップインジケーターを更新
-    stepConfirm.classList.remove("active");
-    stepComplete.classList.add("active");
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      await res.json();
+      console.log("送信成功:", data);
+
+      // 完了画面に切り替え
+      formConfirm.style.display = "none";
+      formComplete.style.display = "block";
+      stepConfirm.classList.remove("active");
+      stepComplete.classList.add("active");
+
+      form.reset();
+    } catch (err) {
+      console.error("送信失敗:", err);
+      alert("送信に失敗しました。もう一度お試しください。");
+    }
   });
 });
