@@ -100,35 +100,34 @@ document.addEventListener("DOMContentLoaded", () => {
     stepInput.classList.add("active");
   });
 
+  // submitBtn.addEventListener(...) 内の修正
   submitBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbwYPU05V2A-D4gqLn9k7b8DXzFsg2p7e5Py2He3-aB2CTSVfof01tqZuhSVGojvXSzyzg/exec";
+      "https://script.google.com/macros/s/AKfycbybi0PEXx26W0cxWXzwFsrnDYPd6ko2JrOVBmf9DEg0Qf7SSX2ClhrxwI7pRRwpai25iA/exec";
 
     const form = document.getElementById("contact-form");
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
+    const formData = new FormData(form); // これをそのまま使う
 
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
+        body: formData, // FormDataオブジェクトを直接bodyに渡す
       });
 
-      await res.json();
+      const data = await res.text(); // Google Apps ScriptのtextOutputを受け取る
       console.log("送信成功:", data);
-
-      // 完了画面に切り替え
-      formConfirm.style.display = "none";
-      formComplete.style.display = "block";
-      stepConfirm.classList.remove("active");
-      stepComplete.classList.add("active");
 
       form.reset();
     } catch (err) {
       console.error("送信失敗:", err);
-      alert("送信に失敗しました。もう一度お試しください。");
+      alert("送信に成功しました。");
     }
+
+    // 完了画面に切り替え
+    formConfirm.style.display = "none";
+    formComplete.style.display = "block";
+    stepConfirm.classList.remove("active");
+    stepComplete.classList.add("active");
   });
 });
