@@ -79,6 +79,7 @@
   top: 0;
   right: 0;
   opacity: 0;
+  height: 100vh;
 }
 .slide.active {
   opacity: 1;
@@ -723,7 +724,7 @@ textPath {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120%;
+    object-fit: contain;
   }
   .fv-img-index-list {
     width: 100%;

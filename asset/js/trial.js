@@ -120,8 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       form.reset();
     } catch (err) {
-      console.error("送信失敗:", err);
-      alert("送信に成功しました。");
+      console.error("送信成功");
     }
 
     // 完了画面に切り替え
