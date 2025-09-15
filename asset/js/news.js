@@ -1,6 +1,41 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
+  async function loadNews() {
+    try {
+      const response = await fetch("./news.json");
+
+      if (!response.ok) {
+        throw new Error("HTTPエラー: " + response.status);
+      }
+
+      const data = await response.json();
+
+      // 以下、処理は前と同じ
+      const sorted = data.sort((a, b) => new Date(b.day) - new Date(a.day));
+      const latest3 = sorted.slice(0, 3);
+
+      const container = document.getElementById("news-container");
+      container.innerHTML = "";
+
+      latest3.forEach((item) => {
+        const ul = document.createElement("ul");
+        ul.classList.add("news-list");
+        ul.innerHTML = `
+        <li class="news-day">${item.day}</li>
+        <li class="news-category">${item.category}</li>
+        <li class="news-ttl">${item.ttl}</li>
+      `;
+        container.appendChild(ul);
+      });
+    } catch (error) {
+      console.error("ニュース読み込み失敗:", error);
+    }
+  }
+
+
+  loadNews();
+
   const categoryItems = document.querySelectorAll(".category-item");
   const categoryTitle = document.querySelector(".news-right .category");
   const newsLists = document.querySelectorAll(".news-list");

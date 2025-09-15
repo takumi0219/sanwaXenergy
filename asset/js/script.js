@@ -391,22 +391,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (scrollBottom <= containerTop) {
         // まだ container に入っていない
         fillHeight = 0;
-        console.log("状態: BEFORE, fillHeight =", fillHeight);
       } else if (scrollY >= containerTop + containerHeight) {
         // container を通り過ぎた
         fillHeight = containerHeight;
-        console.log("状態: AFTER, fillHeight =", fillHeight);
       } else {
         // container 内をスクロールしている
         const progress =
           (scrollBottom - containerTop) / (containerHeight + windowHeight);
         fillHeight = containerHeight * Math.min(1, progress);
-        console.log(
-          "状態: IN CONTAINER, progress =",
-          progress.toFixed(3),
-          "fillHeight =",
-          fillHeight.toFixed(1)
-        );
       }
 
       trialContainer.style.setProperty("--fill-height", `${fillHeight}px`);
