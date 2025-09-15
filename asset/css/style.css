@@ -873,8 +873,19 @@ textPath {
     gap: 20px;
     flex-wrap: wrap;
   }
+  #trial{
+    width: 100%;
+    padding: 40px;
+  }
   .trial-container{
     margin: 40px 0;
+    padding-right: 40px;
+  }
+  .trial-container::after{
+    right: -1px;
+  }
+  .trial-first::after{
+    right: -80px;
   }
   .trial-content{
     align-items: flex-start;

@@ -51,24 +51,24 @@ a {
   --accent: #ffaf54;
 }
 h1 {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Source Sans 3", sans-serif !important;
   font-size: 4rem;
   color: var(--blue);
   mix-blend-mode: difference;
 }
 h2 {
-  font-family: "Orbitron", sans-serif;
+  font-family: "Orbitron", sans-serif !important;
   font-size: 64px;
   color: var(--black);
 }
 h3 {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Source Sans 3", sans-serif !important;
   font-size: 32px;
   color: var(--blue);
 }
 p {
   color: var(--black);
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "Source Sans 3", sans-serif !important;
 }
 
 /* 共通 */
