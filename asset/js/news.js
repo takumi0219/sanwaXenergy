@@ -1,62 +1,54 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
+  let allNews = []; // 全ニュースを保持する
+
   async function loadNews() {
     try {
-      const response = await fetch("./news.json");
-
-      if (!response.ok) {
-        throw new Error("HTTPエラー: " + response.status);
-      }
+      const response = await fetch("../management/news.json");
+      if (!response.ok) throw new Error("HTTPエラー: " + response.status);
 
       const data = await response.json();
+      allNews = data.sort((a, b) => new Date(b.day) - new Date(a.day));
 
-      // 以下、処理は前と同じ
-      const sorted = data.sort((a, b) => new Date(b.day) - new Date(a.day));
-      const latest3 = sorted.slice(0, 3);
-
-      const container = document.getElementById("news-container");
-      container.innerHTML = "";
-
-      latest3.forEach((item) => {
-        const ul = document.createElement("ul");
-        ul.classList.add("news-list");
-        ul.innerHTML = `
-        <li class="news-day">${item.day}</li>
-        <li class="news-category">${item.category}</li>
-        <li class="news-ttl">${item.ttl}</li>
-      `;
-        container.appendChild(ul);
-      });
+      // 初期は「すべて」で表示
+      renderNews("すべて");
     } catch (error) {
       console.error("ニュース読み込み失敗:", error);
     }
   }
 
+  // ニュース描画
+  function renderNews(category) {
+    const container = document.querySelector(".news-container");
+    container.innerHTML = "";
 
-  loadNews();
+    const filtered =
+      category === "すべて"
+        ? allNews
+        : allNews.filter((item) => item.category === category);
 
-  const categoryItems = document.querySelectorAll(".category-item");
-  const categoryTitle = document.querySelector(".news-right .category");
-  const newsLists = document.querySelectorAll(".news-list");
-  const categorySelect = document.getElementById("content-select-members");
-
-  // ニュースのフィルタリング処理
-  function filterNews(selectedCategory) {
-    categoryTitle.textContent = selectedCategory;
-
-    newsLists.forEach((news) => {
-      const newsCategory = news
-        .querySelector(".news-category")
-        .textContent.trim();
-
-      if (selectedCategory === "すべて" || newsCategory === selectedCategory) {
-        news.style.display = "flex";
-      } else {
-        news.style.display = "none";
-      }
+    filtered.forEach((item) => {
+      const ul = document.createElement("ul");
+      ul.classList.add("news-list");
+      ul.innerHTML = `
+        <li class="news-day">${item.day}</li>
+        <li class="news-category">${item.category}</li>
+        <li class="news-ttl">${item.ttl}</li>
+      `;
+      ul.addEventListener("click", () => {
+        window.location.href = `../news/detail.html?id=${item.id}`;
+      });
+      container.appendChild(ul);
     });
+
+    // タイトルを同期
+    document.querySelector(".news-right .category").textContent = category;
   }
+
+  // 左メニューとセレクト
+  const categoryItems = document.querySelectorAll(".category-item");
+  const categorySelect = document.getElementById("content-select-members");
 
   // 左メニュークリック時
   categoryItems.forEach((item) => {
@@ -65,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       item.classList.add("active");
 
       const selectedCategory = item.textContent.trim();
-      filterNews(selectedCategory);
+      renderNews(selectedCategory);
 
       // select と同期
       [...categorySelect.options].forEach((opt) => {
@@ -78,11 +70,14 @@ document.addEventListener("DOMContentLoaded", () => {
   categorySelect.addEventListener("change", (e) => {
     const selectedCategory =
       e.target.options[e.target.selectedIndex].textContent.trim();
-    filterNews(selectedCategory);
 
-    // 左のリストと同期
+    renderNews(selectedCategory);
+
+    // 左メニューと同期
     categoryItems.forEach((el) => {
       el.classList.toggle("active", el.textContent.trim() === selectedCategory);
     });
   });
+
+  loadNews();
 });

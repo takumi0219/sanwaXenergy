@@ -1,7 +1,7 @@
 #trial {
   width: 100%;
   background: none;
-  padding: 120px 0 0 0;
+  padding: 120px 0 ;
 }
 .ttl-wrapper {
   width: 100%;
@@ -71,7 +71,7 @@
   width: 85%;
   padding: 40px 40px 80px 40px;
   background-color: var(--white);
-  border-top-left-radius: 50px;
+  border-radius: 50px 0 0 50px;
 }
 fieldset {
   border: none;
@@ -145,7 +145,7 @@ select {
     }
     .trial-right{
     width: 100%;
-    border-top-right-radius: 50px;
+    border-radius: 50px 50px 0 0;
     padding: 20px 20px 60px 20px;
     }
 }

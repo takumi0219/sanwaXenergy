@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="サンワXエナジークラブの最新ニュース・大会結果・お知らせ・セール情報を掲載しています。ソフトテニス活動の最新情報をご覧ください。"
+      content="サンワXエナジークラブのニュース詳細ページ。大会結果・お知らせ・バーゲン情報の詳細をご覧いただけます。"
     />
     <link
       rel="shortcut icon"
@@ -21,9 +21,8 @@
     <link rel="stylesheet" href="../asset/css/bace.css" />
     <link rel="stylesheet" href="../asset/css/style.css" />
     <link rel="stylesheet" href="../asset/css/news.css" />
-    <script src="../asset/js/script.js" defer></script>
-    <script src="../asset/js/news.js" defer></script>
-    <title>サンワXエナジークラブ - 最新ニュース</title>
+    <script src="../asset/js/detail.js" defer></script>
+    <title>ニュース詳細 | サンワXエナジークラブ</title>
   </head>
   <body>
     <div class="wrapper">
@@ -65,9 +64,8 @@
             </nav>
           </div>
           <div class="hamburger">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
+            <span class="line"></span><span class="line"></span
+            ><span class="line"></span>
           </div>
         </div>
       </header>
@@ -86,31 +84,25 @@
                 </ul>
               </nav>
             </aside>
-
             <div class="news-right">
               <div class="ttl-wrapper">
                 <h2 class="ttl">news</h2>
-                <p class="ttl-sub">大会結果・お知らせ</p>
+                <a href="index.html" class="ttl-sub detail-back">戻る</a>
               </div>
-              <div class="select">
-                <h3 class="category">すべて</h3>
-                <div class="selector">
-                  <select name="content-select" id="content-select-members">
-                    <option value="all">すべて</option>
-                    <option value="result">大会結果</option>
-                    <option value="announvements">お知らせ</option>
-                    <option value="sale">バーゲン</option>
-                  </select>
-                </div>
-              </div>
-              <div class="news-container">
-                
-              </div>
+
+              <article class="news-detail">
+                <time id="detail-day" class="news-day"></time>
+                <span id="detail-category" class="news-category"></span>
+                <h3 id="detail-title" class="news-ttl"></h3>
+                <div id="detail-content" class="news-content"></div>
+                <div id="detail-image" class="detail-image"></div>
+              </article>
             </div>
           </div>
         </section>
       </main>
 
+      <!-- ✅ フッター（index.htmlと同じ） -->
       <footer class="footer-wrapper">
         <div class="top-btn">
           <button
@@ -185,9 +177,7 @@
                     alt="x"
                   />サンワXエナジークラブ
                 </a>
-                <a
-                  href="https://x.com/sanwa_sp?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
-                >
+                <a href="https://x.com/sanwa_sp">
                   <img src="../asset/img/snsx.svg" alt="x" />サンワスポーツ
                 </a>
               </div>
