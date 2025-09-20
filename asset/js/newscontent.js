@@ -1,8 +1,7 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  let allNews = []; // 全ニュースを保持する
-
+  let allNews = []; 
   async function loadNews() {
     try {
       const response = await fetch("./management/news.json");
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ニュース描画
   function renderNews(newsToDisplay) {
     const container = document.querySelector(".news-container");
     container.innerHTML = "";

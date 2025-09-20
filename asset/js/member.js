@@ -39,7 +39,6 @@ const coaches = [
 const contentSelect = document.getElementById("content-select-members");
 const contentArea = document.querySelector(".member-container");
 
-// 表示する内容を定義
 const contents = {
   higasimatuyama: [
     {
@@ -206,17 +205,16 @@ const limits = {
 };
 
 function renderMembers(selectValue) {
-  const areaKey = keyMap[selectValue] ?? selectValue; // valueがローマ字でも日本語でもOK
+  const areaKey = keyMap[selectValue] ?? selectValue;
 
   const all = contents[areaKey] || [];
-  const list = all.slice(0, limits[areaKey] ?? all.length); // 上限で絞る
+  const list = all.slice(0, limits[areaKey] ?? all.length);
 
   if (!list.length) {
     contentArea.innerHTML = `<p>${selectValue} のデータは存在しません</p>`;
     return;
   }
 
-  // まとめて描画（innerHTMLの連結より速くて安全）
   const html = list
     .map(
       (member) => `
@@ -235,10 +233,8 @@ function renderMembers(selectValue) {
   contentArea.innerHTML = html;
 }
 
-// 初期表示
 renderMembers(contentSelect.value);
 
-// 選択変更で再描画
 contentSelect.addEventListener("change", (e) => {
   renderMembers(e.target.value);
 });

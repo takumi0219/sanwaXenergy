@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* リセットCSS =============================================== */
 *,
 *::before,
 *::after {
@@ -41,14 +40,13 @@ a {
   color: inherit;
 }
 
-/* ルール =============================================== */
 :root {
-  --blue: #2a8dfe;
+  --blue: #DE2AFE;
   --black: #131314;
   --white: #ffffff;
   --gray: #737373;
   --purple: #685bc7;
-  --accent: #ffaf54;
+  --accent: #54FF54;
 }
 h1 {
   font-family: "Source Sans 3", sans-serif !important;
@@ -71,7 +69,6 @@ p {
   font-family: "Source Sans 3", sans-serif !important;
 }
 
-/* 共通 */
 section {
   padding: 60px 0;
 }

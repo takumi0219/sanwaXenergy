@@ -3,16 +3,19 @@ const spaceData = [
     title: "東松山庭球場",
     time: "毎週土曜日・日曜日<br>19:00~21:00",
     img: "../asset/img/higasimatuyama.png",
+    alt: "東松山庭球場",
   },
   {
     title: "上尾総合運動公園",
     time: "毎週月曜日<br>17:00~19:00 小学生向け<br>17:00~19:00 中学生・高校生向け",
     img: "../asset/img/higasimatuyama.png",
+    alt: "上尾総合運動公園",
   },
   {
     title: "森下緑地グラウンド",
     time: "毎週木曜日<br>19:00~21:00",
     img: "../asset/img/higasimatuyama.png",
+    alt: "森下緑地グラウンド",
   },
 ];
 
@@ -29,5 +32,6 @@ aboutNavList.forEach((item, index) => {
     aboutSpace.textContent = spaceData[index].title;
     aboutSpaceTime.innerHTML = spaceData[index].time;
     aboutSpaceImg.src = spaceData[index].img;
+    aboutSpaceImg.alt = spaceData[index].alt;
   });
 });

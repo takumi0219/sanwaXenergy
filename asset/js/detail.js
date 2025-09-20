@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("detail-category").textContent = item.category;
       document.getElementById("detail-content").innerHTML = item.content;
 
-      // 画像の存在をチェックし、あれば表示する
       const imageContainer = document.getElementById("detail-image");
       if (item.img) {
         const img = document.createElement("img");

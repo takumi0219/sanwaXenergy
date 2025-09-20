@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const locationSelect = document.getElementById("location");
   const timeInput = document.getElementById("time");
 
-  // 希望場所に応じて時間を自動入力
   function setTimeByLocation() {
     const selectedLocation = locationSelect.value;
     if (selectedLocation === "東松山" || selectedLocation === "久喜") {
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 入力内容を確認画面・完了画面に反映
   function setFormDataToConfirmAndComplete() {
     const name = document.getElementById("name").value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
@@ -51,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const confirmDatetime = `${formattedDate} ${formattedTime}`;
 
-    // 確認画面
     document.getElementById("confirm-name").textContent = name;
     document.getElementById("confirm-gender").textContent = gender;
     document.getElementById("confirm-email").textContent = email;
@@ -60,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("confirm-location").textContent = location;
     document.getElementById("confirm-datetime").textContent = confirmDatetime;
 
-    // 完了画面
     document.getElementById("complete-name").textContent = name;
     document.getElementById("complete-gender").textContent = gender;
     document.getElementById("complete-email").textContent = email;
@@ -70,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("complete-datetime").textContent = confirmDatetime;
   }
 
-  // --- イベントリスナー ---
   locationSelect.addEventListener("change", setTimeByLocation);
 
   confirmBtn.addEventListener("click", (e) => {
@@ -100,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
     stepInput.classList.add("active");
   });
 
-  // submitBtn.addEventListener(...) 内の修正
   submitBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     const scriptURL =
@@ -108,14 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("contact-form");
     const formData = new FormData(form); // これをそのまま使う
-
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
-        body: formData, // FormDataオブジェクトを直接bodyに渡す
+        body: formData, 
       });
 
-      const data = await res.text(); // Google Apps ScriptのtextOutputを受け取る
+      const data = await res.text(); 
       console.log("送信成功:", data);
 
       form.reset();
@@ -123,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("送信成功");
     }
 
-    // 完了画面に切り替え
     formConfirm.style.display = "none";
     formComplete.style.display = "block";
     stepConfirm.classList.remove("active");

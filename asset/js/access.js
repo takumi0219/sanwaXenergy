@@ -33,7 +33,7 @@ const item2Element = document.querySelector(
   ".access-how .access-item:last-child p"
 );
 
-// マップと情報を更新する関数
+
 function updateAccessInfo(location) {
   const data = accessSection[location];
   if (data) {
@@ -45,13 +45,11 @@ function updateAccessInfo(location) {
   }
 }
 
-// セレクトボックスが変更されたときのイベントリスナー
 selectElement.addEventListener("change", (event) => {
   const selectedValue = event.target.value;
   updateAccessInfo(selectedValue);
 });
 
-// ページ読み込み時に初期値を設定
 updateAccessInfo(selectElement.value);
 
 document.querySelector(".btn").addEventListener("click", () => {
