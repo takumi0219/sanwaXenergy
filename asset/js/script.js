@@ -1,15 +1,1 @@
-"use strict";
-document.addEventListener("DOMContentLoaded", () => {
-  const hum = document.querySelector(".hamburger");
-  const header = document.querySelector(".header");
-  const nav = document.querySelector(".nav-list");
-  const navLine = document.querySelectorAll(".line");
-
-  hum.addEventListener("click", () => {
-    nav.classList.toggle("active");
-    header.classList.toggle("active");
-    navLine.forEach((line) => {
-      line.classList.toggle("active");
-    });
-  });
-});
+"use strict";document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".hamburger"),t=document.querySelector(".header"),c=document.querySelector(".nav-list"),o=document.querySelectorAll(".line");e.addEventListener("click",()=>{c.classList.toggle("active"),t.classList.toggle("active"),o.forEach(e=>{e.classList.toggle("active")})})});

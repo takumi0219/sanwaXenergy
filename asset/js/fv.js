@@ -1,16 +1,1 @@
-document.addEventListener('DOMContentLoaded', function() {
-      const circle = document.querySelectorAll(".circle");
-  const slide = document.querySelectorAll(".slide");
-  let current = 0;
-
-  setInterval(() => {
-    slide.forEach((s) => s.classList.remove("active"));
-    circle.forEach((c) => c.classList.remove("active"));
-
-    slide[current].classList.add("active");
-    circle[current].classList.add("active");
-
-    current = (current + 1) % slide.length;
-  }, 5000);
-}
-);
+document.addEventListener("DOMContentLoaded",function(){const e=document.querySelectorAll(".circle"),t=document.querySelectorAll(".slide");let c=0;setInterval(()=>{t.forEach(e=>e.classList.remove("active")),e.forEach(e=>e.classList.remove("active")),t[c].classList.add("active"),e[c].classList.add("active"),c=(c+1)%t.length},5e3)});
