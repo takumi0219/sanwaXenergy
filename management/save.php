@@ -1,15 +1,34 @@
 <?php
-// PHPスクリプトの改善
+// Vercelにデプロイする場合、PHPをサーバーレス関数として実行
+// このファイルは `api/save.php` として保存する必要があります
+
+// エラー報告を有効にする
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// PHPの実行が許可されていないことを警告する
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Allow: POST');
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method Not Allowed. This endpoint only accepts POST requests.']);
+    exit;
+}
+
 // ヘッダーを最初に定義
 header('Content-Type: application/json; charset=UTF-8');
 
-// ファイルパスを定数として定義
-const NEWS_FILE = './news.json';
-const UPLOAD_DIR = './uploads/'; // このディレクトリにファイルを物理的に保存
+// Vercelでは、ファイルシステムへの書き込みは一時的であり、永続的なストレージには向きません。
+// この例では、`news.json`とアップロードされた画像ファイルを
+// 永続的に保存するための解決策として、外部のストレージサービス（例: AWS S3, Google Cloud Storage）
+// の使用を検討する必要があります。このスクリプトは、Vercelが一時的にファイルに
+// アクセスできるローカルファイルシステムを模倣しています。
+
+const NEWS_FILE = '/tmp/news.json';
+
+// ご要望のファイル構造に合わせてパスを修正
+// Vercelのサーバーレス関数は、このディレクトリへの書き込みをサポートしていません
+const UPLOAD_DIR = './uploads/';
 
 // エラーハンドリング関数を定義
 function send_error($message, $code = 400) {
@@ -28,29 +47,29 @@ if (empty($category) || empty($ttl) || empty($content)) {
     send_error('All text fields are required.');
 }
 
+// ディレクトリが存在しない場合は作成
+if (!is_dir(UPLOAD_DIR)) {
+    // Vercel上では、このmkdirは失敗する可能性が高い
+    if (!mkdir(UPLOAD_DIR, 0755, true)) {
+        send_error('Failed to create upload directory. Vercel does not support writing to the file system.', 500);
+    }
+}
+
 // 画像のアップロード処理
 $img_path = null;
 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-    // ディレクトリが存在しない場合は作成
-    if (!is_dir(UPLOAD_DIR)) {
-        if (!mkdir(UPLOAD_DIR, 0755, true)) {
-            send_error('Failed to create upload directory.', 500);
-        }
-    }
-
     $file_tmp_path = $_FILES['image']['tmp_name'];
     $file_extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
     $file_name = uniqid() . '.' . $file_extension;
     $dest_path = UPLOAD_DIR . $file_name;
 
-    // ファイルを移動
+    // Vercel上では、このmove_uploaded_fileは失敗する可能性が高い
     if (!move_uploaded_file($file_tmp_path, $dest_path)) {
-        send_error('Failed to move uploaded file.', 500);
+        send_error('Failed to move uploaded file. Vercel does not support writing to the file system.', 500);
     }
     
-    // ここでニュース詳細ページからアクセスできる正しいパスを設定
-    // detail.html (site/news/) から uploads (site/management/uploads/) への相対パス
-    $img_path = '../management/uploads/' . $file_name; 
+    // ご要望のパスに合わせて修正
+    $img_path = './uploads/' . $file_name;
 }
 
 // ファイルの読み込みと存在チェック
@@ -59,9 +78,7 @@ if (!file_exists(NEWS_FILE) || filesize(NEWS_FILE) === 0) {
 } else {
     $json = file_get_contents(NEWS_FILE);
     $newsItems = json_decode($json, true);
-
     if ($newsItems === null) {
-        unlink(NEWS_FILE);
         $newsItems = [];
     }
 }
@@ -76,7 +93,7 @@ $newNewsItem = [
     'category' => htmlspecialchars($category, ENT_QUOTES, 'UTF-8'),
     'ttl' => htmlspecialchars($ttl, ENT_QUOTES, 'UTF-8'),
     'content' => htmlspecialchars($content, ENT_QUOTES, 'UTF-8'),
-    'img' => $img_path // 更新された正しいパスをJSONに書き込む
+    'img' => $img_path
 ];
 
 // 新しいニュースをリストに追加
@@ -84,9 +101,6 @@ $newsItems[] = $newNewsItem;
 
 // JSON形式でファイルに書き込み
 if (file_put_contents(NEWS_FILE, json_encode($newsItems, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)) === false) {
-    if ($img_path && file_exists($img_path)) {
-      unlink($img_path);
-    }
     send_error('Failed to write to file.', 500);
 }
 
